@@ -12,6 +12,7 @@
 
 		<table  class='table table-striped'>
 			<tr>
+			    <th>Email</th>
 				<th>Date</th>
 				<th>Time</th>
 				<th>Patient Name</th>
@@ -21,15 +22,17 @@
 
 			</tr>
 			<tr ng-repeat ='x in vm.appointments | startFrom:vm.currentPage*vm.pageSize | limitTo:vm.pageSize | filter: filter_name'>
+					<td ng-bind='x.email'></td>
 					<td ng-bind='x.date | date: "longDate"'></td>
+					
 					<td ng-bind='x.time | date: "shortTime"'></td>
 					<td ng-bind='x.patient_name'></td>
 					<td ng-bind='x.complain'></td>
 					<td ng-bind='x.speciality'></td>
 					<td ng-bind='x.doctor'></td>
 					
-					<td><button ng-click="vm.update(x)">Update</button></td>
-					<td><button ng-click="vm.cancel(x)">Cancel</button></td>
+					<td><button ng-click="update()">Update</button></td>
+					<!--<td><button ng-click="vm.cancel(x)">Cancel</button></td>-->
 					
 			</tr>
 		</table>

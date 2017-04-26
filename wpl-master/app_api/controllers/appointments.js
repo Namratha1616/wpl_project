@@ -57,13 +57,13 @@ module.exports.appointmentInsert = function(req,res){
   //console.log('request', req.body)
   console.log("!!!!!!!!!!");
  
-  console.log("Yayyyyyy there is result coming from mongodb")/*
+  /*console.log("Yayyyyyy there is result coming from mongodb")
       .exec(function(err, user) {
          console.log(user);
         res.status(200).json(user);
 
       });*/
-  console.log(user);
+  //console.log(user);
   appointment.email = req.body.email;
   appointment.date = req.body.date;
   appointment.time = req.body.time;
@@ -73,7 +73,7 @@ module.exports.appointmentInsert = function(req,res){
   appointment.doctor = req.body.doctor;
   appointment.save(function (err) {
     console.log(err);
-    console.log("Error is in appointmentInsert");
+    //console.log("Error is in appointmentInsert");
    if(!err)
    {
      res.status(200).json(appointment);
@@ -86,16 +86,17 @@ module.exports.appointmentUpdate = function(req, res) {
 console.log(req.body)
   
   var appointment = new Appointment();
-  appointment.date = req.body.date;
-  appointment.time = req.body.time;
+  //appointment.email = req.body.email;
+  //appointment.date = req.body.date;
+  //appointment.time = req.body.time;
   
-  Appointment.findOne({patient_name: req.body.name }, function(err,doc){  
-    doc.date= req.body.date, 
-    doc.time= req.body.time, 
-    doc.complain= req.body.complain;
+  Appointment.findOne({email: req.body.email }, function(err,doc){  
+    doc.date= req.body.date; 
+    doc.time= req.body.time;
+    //doc.complain= req.body.complain;
     
-    doc.speciality = req.body.speciality;
-    doc.doctor = req.body.doctor;
+    //doc.speciality = req.body.speciality;
+    //doc.doctor = req.body.doctor;
     doc.save(function(err, appointment) {
     if (!err)res.status(200).json(appointment);
     else

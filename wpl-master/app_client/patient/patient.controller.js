@@ -6,9 +6,16 @@ app.controller('patientCtrl', ['$location', 'authentication','$http','$scope','m
 	var vm = this;
     $scope.specialities = [];
     $scope.names = [];
+    //vm.newAppointment = [];
 
+    $scope.logout = function(){
+      alert("clicked");
+      console.log("logout");
+      authentication.logout();
+      $location.path('/login');
+    }
 
-    vm.selectSpeciality = function(){
+    $scope.selectSpeciality = function(){
 	$http.get('/api/admin/doctor/speciality').
 	success(function(result)
 	{
@@ -21,7 +28,7 @@ app.controller('patientCtrl', ['$location', 'authentication','$http','$scope','m
 	})
     }
 
-    vm.selectedValue = function(item){
+    $scope.selectedValue = function(item){
     	console.log(item);
     var config = {
                 params: {speciality: item}
@@ -42,11 +49,21 @@ app.controller('patientCtrl', ['$location', 'authentication','$http','$scope','m
 
     }
 
-   vm.onSub = function () {
+    /* var doctor = JSON.parse(sessionStorage.doctor);
+  vm.doctor = {
+    doctor_name: doctor.doctor_name,
+    doctor_email:  doctor.doctor_email,
+    speciality: doctor.speciality,
+    //time_start: doctor.time_start,
+    //time_end: doctor.time_end
+  }*/
+
+   $scope.onSub = function () {
    	
       console.log("Hey there");
-      var vm = this;
-      vm.newAppointment = {
+      //var vm = this;
+      //var newAppointment = JSON.parse(sessionStorage.newAppointment)
+      /*vm.newAppointment = {
       	           email: '',
                    date: '',
                    time: '',
@@ -56,37 +73,38 @@ app.controller('patientCtrl', ['$location', 'authentication','$http','$scope','m
 
     //time_start: '',
     //time_end: ''
-  }  
+  }*/  
    //vm.newAppointment.email: authentication.currentUser().email;
-    var cUser = authentication.currentUser();
-    vm.newAppointment.email = cUser.email;
-     console.log(vm.newAppointment);
+    /*var cUser = authentication.currentUser();
+    vm.newAppointment.email = cUser.email;*/
+     console.log($scope.newAppointment);
       
      //console.log(vm.newAppointment.email);
       //validations to add new appointment
-      vm.errorMessages = [];
+      $scope.errorMessages = [];
       console.log("&&&&&&");
-      if(vm.newAppointment.date == undefined || vm.newAppointment.time == undefined || vm.newAppointment.complain == undefined || vm.newAppointment.complain == '') {
-      vm.errorMessages.push("All three fields are requied!");
+      
+      if($scope.newAppointment.email == undefined || $scope.newAppointment.date == undefined || $scope.newAppointment.time == undefined || $scope.newAppointment.complain == undefined || $scope.newAppointment.complain == '') {
+      $scope.errorMessages.push("All three fields are requied!");
       return;
     }
-
-    if(vm.newAppointment.complain.length < 10) {
-      vm.errorMessages.push("Complain must be at least 10 characters long!");
+      //console.log("3333333333");
+    if($scope.newAppointment.complain.length < 10) {
+      $scope.errorMessages.push("Complain must be at least 10 characters long!");
     }
 
-    if(vm.newAppointment.date < new Date()) {
-      vm.errorMessages.push("You can only add a future appointment!");
+    if($scope.newAppointment.date < new Date()) {
+      $scope.errorMessages.push("You can only add a future appointment!");
     }
 
   
-    if(8 > vm.newAppointment.time.getHours() || vm.newAppointment.time.getHours() > 16) {
-      vm.errorMessages.push("Appointment must be between 8am and 5pm!");
+    if(8 > $scope.newAppointment.time.getHours() || $scope.newAppointment.time.getHours() > 16) {
+      $scope.errorMessages.push("Appointment must be between 8am and 5pm!");
     }
 
-    //console.log(vm.newAppointment);
+    console.log($scope.newAppointment);
 
-   $http.post('/api/appointment/new',vm.newAppointment).success(function(data){
+   $http.post('/api/appointment/new',$scope.newAppointment).success(function(data){
         console.log("Success");
         //redirect to appointment view page after successfully inserted/posted to db
         $location.path('/appointment');
@@ -106,39 +124,25 @@ app.controller('patientCtrl', ['$location', 'authentication','$http','$scope','m
 	}]);
     
 
-/*app.controller('updatePatientCtrl',['$location', 'authentication','$http','$scope','meanData', 
+
+
+app.controller('updatePatientCtrl',['$location', 'authentication','$http','$scope','meanData', 
 	function($location, authentication, $http,$scope, meanData) {
-    var vm = null;
-    var appntment = JSON.parse(sessionStorage.user);
-    vm.user = {
-    	user_name: appntment.email,
-    	user_email: appntment.name; 
-    }
+    var vm = this;
+     $scope.updateAppointment = [];
 	
+	$scope.onSubmit = function(){
+		console.log("Updating appointment");
+		$http.post('/api/appointment/update', $scope.updateAppointment).success(function(data){
+			console.log("Happening in updation");
+			console.log('response..', data);
+			$location.path('/appointment');
+		})
+		.error(function(e)
+		{
+			console.log("error",e);
+		});
+	}
 	}]);
 
 
-app.controller('updateDoctorCtrl',['$http', 'authentication', '$location', function($http, authentication, $location) {
-  console.log("update doctor controller is running...");
-  var vm = this
-  var doctor = JSON.parse(sessionStorage.doctor);
-  vm.doctor = {
-    doctor_name: doctor.doctor_name,
-    doctor_email:  doctor.doctor_email,
-    speciality: doctor.speciality,
-    //time_start: doctor.time_start,
-    //time_end: doctor.time_end
-  }
-  
-  vm.onSubmit = function () {
-    console.log('Submitting new form');
-    $http.post('/api/admin/doctor/update', vm.doctor).success(function(data) {
-      console.log('response..', data);
-      $location.path('doctor');
-    })
-    .error(function (e) {
-      console.log('error..', e);
-    });
-  }
-
-}]);*/

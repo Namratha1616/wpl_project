@@ -47,9 +47,9 @@
       templateUrl: '/patient/patient.view.html',
       controller: 'patientCtrl',
       controllerAs: 'vm'
-    })/*.when('/patient/appointment/docnamespeaciality',{
-      templateUrl: '/patient/patient.view.html',
-      controller:'appntmntslctCtrl',
+    }).when('/patient/updateappointment',{
+      templateUrl: '/patient/appointmentupdate.view.html',
+      controller:'updatePatientCtrl',
       controllerAs: 'vm'
     })*/
       .otherwise({redirectTo: '/'});

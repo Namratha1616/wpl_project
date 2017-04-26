@@ -19,6 +19,9 @@
     return {
       getProfile : getProfile
     };
-  }
+
+
+}
+
 
 })();
