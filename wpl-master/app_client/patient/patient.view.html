@@ -1,0 +1,59 @@
+<!--<div>
+<div ng-app="meanApp" ng-controller="patientCtrl">
+
+<select ng-model="displayspeciality" ng-change="selectedValue(displayspeciality)" 
+        ng-options="item for item in specialities">
+    <option value="">Select Speciality</option>
+</select>
+</div>
+</div>-->
+
+<navigation></navigation>
+<h4><button ng-click='vm.logout()' >Logout</button>  
+<div id='newAppointment'>
+<h4><a href="profile">Go to your profile</a></h4>
+<div class="row" style="background-color: white;border-radius: 25px;border: 2px solid #73AD21; padding: 20px; ">
+
+		<h4><button ng-click='vm.selectSpeciality()'>Book Appointment</button> </h4>
+</div>
+</br>
+<div>
+<!--<select ng-model="newAppointment.speciality" ng-change="vm.selectedValue(newAppointment.speciality)" 
+        ng-options="item for item in specialities">
+    <h3>Speciality:</h3>><option value="">Select Speciality</option>
+</select>-->
+</div>
+</br>
+<div>
+<!--<select ng-model="newAppointment.doctor"  
+        ng-options="item for item in names">
+    <h3>Doctor:</h3><option value="">Select Doctor</option>
+ </select>-->
+</div>
+<div>
+ <form ng-submit="vm.onSub()">
+			Date: <input type='date' ng-model='vm.newAppointment.date' class='form-control'><br>
+			Time: <input type='time' ng-model='vm.newAppointment.time' class='form-control'><br>
+			<p>Full Name: <textarea ng-model='vm.newAppointment.name' class='form-control'></textarea></p>
+			Speciality: <select ng-model='vm.newAppointment.speciality' ng-change="vm.selectedValue(vm.newAppointment.speciality)" 
+        ng-options="item for item in specialities"><option value="">Select Speciality</option></select></br>
+            Doctor:<select ng-model="vm.newAppointment.doctor"  ng-options="item for item in names"><option value="">Select Doctor
+            </option></select> </br>
+			<p style='vertical-align:top'>Complain: <textarea rows='8' ng-model='vm.newAppointment.complain' class='form-control'></textarea></p>
+			 <button type="submit" class='btn btn-info pull-right'>ADD!</button>
+			<a href="#/" class='btn btn-warning pull-right'>Cancel</a>
+			<div ng-repeat='message in errorMessages'>
+				<p style='color:red;' ng-bind='message'></p>
+			</div>
+		</form>
+</div>
+</div>
+
+<style type="text/css">
+  body {
+    background:#edf1f4 url('img/add.jpg');
+    font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans serif;
+    font-size:16px;
+    color:#444;
+  }
+</style>

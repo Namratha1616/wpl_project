@@ -1,0 +1,46 @@
+<navigation></navigation>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Register</h1>
+      <p class="lead">Already a member? Please <a href="login">log in</a> instead.</p>
+      <form ng-submit="vm.onSubmit()">
+        <div class="form-group">
+          <label for="name">Full name</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="vm.credentials.name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter Email" ng-model="vm.credentials.email">
+        </div>
+       <!-- <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="number" class="form-control" id="phone" placeholder="Enter Phone" ng-model="vm.credentials.phone" ng-minlength="10"  ng-maxlength="10">
+        </div>-->
+
+        <!--<div class="form-group">
+          <label for="role">User Role</label>
+          <select id="cmbAll"  tabindex="" title="" ng-change="onChange()" ng-model="cmbAll">
+              <option value="">-Select Role-</option>
+              <option value="doctor">Doctor</option>
+              <option value="patient">Patient</option>
+          </select>
+        </div>-->
+
+       <!-- <div class="form-group">
+          <label for="age">Age</label>
+          <input type="text" class="form-control" id="age" placeholder="Enter Age" ng-model="vm.credentials.age">
+        </div>-->
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
+        </div>
+        <button type="submit" class="btn btn-default">Register!</button>
+      </form>
+    </div>
+  </div>
+
+</div>
